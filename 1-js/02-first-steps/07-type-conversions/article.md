@@ -70,7 +70,7 @@ number 类型转换规则：
 | `undefined` | `NaN` |
 | `null` | `0` |
 |<code>true&nbsp;和&nbsp;false</code> | `1` and `0` |
-| `string` | 去掉首尾空格后的纯数字字符串中含有的数字。如果剩余字符串为空，则转换结果为 `0`。否则，将会从剩余字符串中“读取”数字。当类型转换出现 error 时返回 `NaN`。 |
+| `string` | 去掉首尾空白字符（空格、换行符 `\n`、制表符 `\t` 等）后的纯数字字符串中含有的数字。如果剩余字符串为空，则转换结果为 `0`。否则，将会从剩余字符串中“读取”数字。当类型转换出现 error 时返回 `NaN`。 |
 
 例子：
 
@@ -83,7 +83,7 @@ alert( Number(false) );       // 0
 
 请注意 `null` 和 `undefined` 在这有点不同：`null` 变成数字 `0`，`undefined` 变成 `NaN`。
 
-大多数数学运算符也执行这种转换，我们将在下一节中进行介绍。
+大多数数学运算符都执行这种转换，我们将在下一节中进行介绍。
 
 ## 布尔型转换
 
@@ -111,7 +111,7 @@ alert( Boolean("") ); // false
 
 ```js run
 alert( Boolean("0") ); // true
-alert( Boolean(" ") ); // 空白，也是 true（任何非空字符串都是 true）
+alert( Boolean(" ") ); // 空格，也是 true（任何非空字符串都是 true）
 ```
 ````
 
@@ -130,7 +130,7 @@ alert( Boolean(" ") ); // 空白，也是 true（任何非空字符串都是 tru
 | `undefined` | `NaN` |
 | `null` | `0` |
 | <code>true&nbsp;/&nbsp;false</code> | `1 / 0` |
-| `string` | “按原样读取”字符串，两端的空白会被忽略。空字符串变成 `0`。转换出错则输出 `NaN`。 |
+| `string` | “按原样读取”字符串，两端的空白字符（空格、换行符 `\n`、制表符 `\t` 等）会被忽略。空字符串变成 `0`。转换出错则输出 `NaN`。 |
 
 **布尔型转换** —— 转换发生在进行逻辑操作时，也可以通过 `Boolean(value)` 进行显式转换。
 

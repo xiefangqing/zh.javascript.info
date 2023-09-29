@@ -206,7 +206,7 @@ export function sayHi() {
 
 这里，`admin.js` 导出了 `config` 对象（最初是空的，但也可能有默认属性）。
 
-然后，在 `init.js` 中，我们应用的第一个脚本，我们从 `init.js` 导入了 `config` 并设置了 设置了 `config.user`：
+然后，在 `init.js` 中，我们应用的第一个脚本，我们从 `init.js` 导入了 `config` 并设置了 `config.user`：
 
 ```js
 // 📁 init.js
@@ -225,6 +225,7 @@ import { sayHi } from './admin.js';
 sayHi(); // Ready to serve, *!*Pete*/!*!
 ```
 
+
 ### import.meta
 
 `import.meta` 对象包含关于当前模块的信息。
@@ -233,7 +234,8 @@ sayHi(); // Ready to serve, *!*Pete*/!*!
 
 ```html run height=0
 <script type="module">
-  alert(import.meta.url); // 脚本的 URL（对于内联脚本来说，则是当前 HTML 页面的 URL）
+  alert(import.meta.url); // 脚本的 URL
+  // 对于内联脚本来说，则是当前 HTML 页面的 URL
 </script>
 ```
 
@@ -298,7 +300,7 @@ sayHi(); // Ready to serve, *!*Pete*/!*!
 
 这是因为模块脚本是被延迟的，所以要等到 HTML 文档被处理完成才会执行它。而常规脚本则会立即运行，所以我们会先看到常规脚本的输出。
 
-当使用模块脚本时，我们应该知道 HTML 页面在加载时就会显示出来，在 HTML 页面加载完成后才会执行 JavaScript 模块，因此用户可能会在 JavaScript 应用程序准备好之前看到该页面。某些功能那时可能还无法正使用。我们应该放置“加载指示器（loading indicator）”，否则，请确保不会使用户感到困惑。
+当使用模块脚本时，我们应该知道 HTML 页面在加载时就会显示出来，在 HTML 页面加载完成后才会执行 JavaScript 模块，因此用户可能会在 JavaScript 应用程序准备好之前看到该页面。某些功能可能还无法使用。我们应该放置“加载指示器（loading indicator）”，或者以其他方式确保访问者不会因此而感到困惑。
 
 ### Async 适用于内联脚本（inline script）
 
@@ -308,7 +310,7 @@ sayHi(); // Ready to serve, *!*Pete*/!*!
 
 例如，下面的内联脚本具有 `async` 特性，因此它不会等待任何东西。
 
-它执行导入（fetch `./analytics.js`），并在准备导入完成时运行，即使 HTML 文档还未完成，或者其他脚本仍在等待处理中。
+它执行导入（fetch `./analytics.js`），并在导入完成时运行，即使 HTML 文档还未完成，或者其他脚本仍在等待处理中。
 
 这对于不依赖任何其他东西的功能来说是非常棒的，例如计数器，广告，文档级事件监听器。
 
@@ -394,7 +396,7 @@ import {sayHi} from 'sayHi'; // Error，“裸”模块
 <script src="bundle.js"></script>
 ```
 
-也就是说，原生模块也是可以使用的。所以，我们在这儿将不会使用 Webpack：你可以稍后再配置它。
+关于构建工具说了这么多，但其实原生模块也是可以用的。所以，我们在这儿将不会使用 Webpack：你可以稍后再配置它。
 
 ## 总结
 

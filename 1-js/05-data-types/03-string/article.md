@@ -48,7 +48,7 @@ let guestList = "Guests: // Error: Unexpected token ILLEGAL
   * John";
 ```
 
-当不考虑多行字符串的需要时，单引号和双引号来自语言创建的古时代。反引号出现较晚，因此更通用。
+单引号和双引号来自语言创建的的古老时代，当时没有考虑到多行字符串的需要。反引号出现较晚，因此更通用。
 
 反引号还允许我们在第一个反引号之前指定一个“模版函数”。语法是：<code>func&#96;string&#96;</code>。函数 `func` 被自动调用，接收字符串和嵌入式表达式，并处理它们。你可以在 [docs](mdn:/JavaScript/Reference/Template_literals#Tagged_template_literals) 中阅读更多关于它们的信息。这叫做 "tagged templates"。此功能可以更轻松地将字符串包装到自定义模版或其他函数中，但这很少使用。
 
@@ -214,7 +214,7 @@ alert( 'Interface'.toLowerCase() ); // interface
 
 或者我们想要使一个字符变成小写：
 
-```js
+```js run
 alert( 'Interface'[0].toLowerCase() ); // 'i'
 ```
 
@@ -364,15 +364,15 @@ alert( "Hello".includes("Bye") ); // false
 `str.includes` 的第二个可选参数是开始搜索的起始位置：
 
 ```js run
-alert( "Midget".includes("id") ); // true
-alert( "Midget".includes("id", 3) ); // false, 从位置 3 开始没有 "id"
+alert( "Widget".includes("id") ); // true
+alert( "Widget".includes("id", 3) ); // false, 从位置 3 开始没有 "id"
 ```
 
 方法 [str.startsWith](mdn:js/String/startsWith) 和 [str.endsWith](mdn:js/String/endsWith) 的功能与其名称所表示的意思相同：
 
 ```js run
-alert( "Widget".startsWith("Wid") ); // true，"Widget" 以 "Wid" 开始
-alert( "Widget".endsWith("get") ); // true，"Widget" 以 "get" 结束
+alert( "*!*Wid*/!*get".startsWith("Wid") ); // true，"Widget" 以 "Wid" 开始
+alert( "Wid*!*get*/!*".endsWith("get") ); // true，"Widget" 以 "get" 结束
 ```
 
 ## 获取子字符串
@@ -407,7 +407,7 @@ JavaScript 中有三种获取字符串的方法：`substring`、`substr` 和 `sl
     ```
 
 `str.substring(start [, end])`
-: 返回字符串在 `start` 和 `end` **之间** 的部分。
+: 返回字符串从 `start` 到（但不包括）`end` 的部分。
 
     这与 `slice` 几乎相同，但它允许 `start` 大于 `end`。
 
@@ -450,11 +450,11 @@ JavaScript 中有三种获取字符串的方法：`substring`、`substr` 和 `sl
 | 方法 | 选择方式…… | 负值参数 |
 |--------|-----------|-----------|
 | `slice(start, end)` | 从 `start` 到 `end`（不含 `end`）| 允许 |
-| `substring(start, end)` | `start` 与 `end` 之间（包括 `start`，但不包括 `end`） | 负值代表 `0` |
+| `substring(start, end)` | 从 `start` 到 `end`（不含 `end`） | 负值被视为 `0` |
 | `substr(start, length)` | 从 `start` 开始获取长为 `length` 的字符串 | 允许 `start` 为负数 |
 
 ```smart header="使用哪一个？"
-它们可以完成这项工作。形式上，`substr` 有一个小缺点：它不是在 JavaScript 核心规范中描述的，而是在附录 B 中，它涵盖了主要由于历史原因而存在的仅浏览器特性。因此，非浏览器环境可能无法支持它。但实际上它在任何地方都有效。
+它们都可用于获取子字符串。正式一点来讲，`substr` 有一个小缺点：它不是在 JavaScript 核心规范中描述的，而是在附录 B 中。附录 B 的内容主要是描述因历史原因而遗留下来的仅浏览器特性。因此，理论上非浏览器环境可能无法支持 `substr`，但实际上它在别的地方也都能用。
 
 相较于其他两个变体，`slice` 稍微灵活一些，它允许以负值作为参数并且写法更简短。因此仅仅记住这三种方法中的 `slice` 就足够了。
 ```

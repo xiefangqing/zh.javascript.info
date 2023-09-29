@@ -10,7 +10,7 @@
 
 每个 DOM 节点都属于相应的内建类。
 
-层次结构（hierarchy）的根节点是 [EventTarget](https://dom.spec.whatwg.org/#eventtarget)，[Node](http://dom.spec.whatwg.org/#interface-node) 继承自它，其他 DOM 节点继承自 Node。
+层次结构（hierarchy）的根节点是 [EventTarget](https://dom.spec.whatwg.org/#eventtarget)，[Node](https://dom.spec.whatwg.org/#interface-node) 继承自它，其他 DOM 节点继承自 Node。
 
 下图做了进一步说明：
 
@@ -18,28 +18,49 @@
 
 类如下所示：
 
-- [EventTarget](https://dom.spec.whatwg.org/#eventtarget) — 是根的“抽象（abstract）”类。该类的对象从未被创建。它作为一个基础，以便让所有 DOM 节点都支持所谓的“事件（event）”，我们会在之后学习它。
-- [Node](http://dom.spec.whatwg.org/#interface-node) — 也是一个“抽象”类，充当 DOM 节点的基础。它提供了树的核心功能：`parentNode`，`nextSibling`，`childNodes` 等（它们都是 getter）。`Node` 类的对象从未被创建。但是有一些继承自它的具体的节点类，例如：文本节点的 `Text`，元素节点的 `Element`，以及更多异域（exotic）类，例如注释节点的 `Comment`。
-- [Element](http://dom.spec.whatwg.org/#interface-element) — 是 DOM 元素的基本类。它提供了元素级的导航（navigation），例如 `nextElementSibling`，`children`，以及像 `getElementsByTagName` 和 `querySelector` 这样的搜索方法。浏览器中不仅有 HTML，还会有 XML 和 SVG。`Element` 类充当更多特定类的基本类：`SVGElement`，`XMLElement` 和 `HTMLElement`。
-- [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) — 最终是所有 HTML 元素的基本类。各种 HTML 元素均继承自它：
-    - [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) — `<input>` 元素的类，
-    - [HTMLBodyElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlbodyelement) — `<body>` 元素的类，
-    - [HTMLAnchorElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlanchorelement) — `<a>` 元素的类，
+- [EventTarget](https://dom.spec.whatwg.org/#eventtarget) —— 是一切的根“抽象（abstract）”类。
+
+    该类的对象从未被创建。它作为一个基础，以便让所有 DOM 节点都支持所谓的“事件（event）”，我们会在之后学习它。
+
+- [Node](http://dom.spec.whatwg.org/#interface-node) —— 也是一个“抽象”类，充当 DOM 节点的基础。
+
+    它提供了树的核心功能：`parentNode`，`nextSibling`，`childNodes` 等（它们都是 getter）。`Node` 类的对象从未被创建。但是还有一些继承自它的其他类（因此继承了 `Node` 的功能）。
+
+- [Document](https://dom.spec.whatwg.org/#interface-document) 由于历史原因通常被 `HTMLDocument` 继承（尽管最新的规范没有规定）—— 是一个整体的文档。
+
+    全局变量 `document` 就是属于这个类。它作为 DOM 的入口。
+
+- [CharacterData](https://dom.spec.whatwg.org/#interface-characterdata) —— 一个“抽象”类，被下述类继承：
+    - [Text](https://dom.spec.whatwg.org/#interface-text) —— 对应于元素内部文本的类，例如 `<p>Hello</p>` 中的 `Hello`。
+    - [Comment](https://dom.spec.whatwg.org/#interface-comment) —— 注释类。它们不会被展示出来，但每个注释都会成为 DOM 中的一员。
+
+- [Element](http://dom.spec.whatwg.org/#interface-element) —— 是 DOM 元素的基础类。
+
+    它提供了元素级导航（navigation），如 `nextElementSibling`，`children`，以及搜索方法，如 `getElementsByTagName` 和 `querySelector`。
+
+    浏览器不仅支持 HTML，还支持 XML 和 SVG。因此，`Element` 类充当的是更具体的类的基础：`SVGElement`，`XMLElement`（我们在这里不需要它）和 `HTMLElement`。
+
+- 最后，[HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) —— 是所有 HTML 元素的基础类。我们大部分时候都会用到它。
+
+    它会被更具体的 HTML 元素继承：
+    - [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) —— `<input>` 元素的类，
+    - [HTMLBodyElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlbodyelement) —— `<body>` 元素的类，
+    - [HTMLAnchorElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlanchorelement) —— `<a>` 元素的类，
     - ……等。
 
 还有很多其他标签具有自己的类，可能还具有特定的属性和方法，而一些元素，如 `<span>`、`<section>`、`<article>` 等，没有任何特定的属性，所以它们是 `HTMLElement` 类的实例。
 
-因此，给定节点的全部属性和方法都是继承的结果。
+因此，给定节点的全部属性和方法都是继承链的结果。
 
 例如，我们考虑一下 `<input>` 元素的 DOM 对象。它属于 [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) 类。
 
 它获取属性和方法，并将其作为下列类（按继承顺序列出）的叠加：
 
-- `HTMLInputElement` — 该类提供特定于输入的属性，
-- `HTMLElement` — 它提供了通用（common）的 HTML 元素方法（以及 getter 和 setter）
-- `Element` — 提供通用（generic）元素方法，
-- `Node` — 提供通用 DOM 节点属性，
-- `EventTarget` — 为事件（包括事件本身）提供支持，
+- `HTMLInputElement` —— 该类提供特定于输入的属性，
+- `HTMLElement` —— 它提供了通用（common）的 HTML 元素方法（以及 getter 和 setter）
+- `Element` —— 提供通用（generic）元素方法，
+- `Node` —— 提供通用 DOM 节点属性，
+- `EventTarget` —— 为事件（包括事件本身）提供支持，
 - ……最后，它继承自 `Object`，因为像 `hasOwnProperty` 这样的“普通对象”方法也是可用的。
 
 我们可以通过回调来查看 DOM 节点类名，因为对象通常都具有 `constructor` 属性。它引用类的 constructor，`constructor.name` 就是它的名称：
@@ -133,10 +154,10 @@ interface HTMLInputElement: HTMLElement {
   <script>
   let elem = document.body;
 
-  // 让我们检查一下它是什么？
+  // 让我们检查一下：elem 中的节点类型是什么？
   alert(elem.nodeType); // 1 => element
 
-  // 第一个子节点是
+  // 它的第一个子节点的类型是……
   alert(elem.firstChild.nodeType); // 3 => text
 
   // 对于 document 对象，类型是 9
@@ -190,7 +211,7 @@ tagName 和 nodeName 之间有什么不同吗？
 如果我们只处理元素，那么 `tagName` 和 `nodeName` 这两种方法，我们都可以使用，没有区别。
 
 ```smart header="标签名称始终是大写的，除非是在 XML 模式下"
-浏览器有两种处理文档（document）的模式：HTML 和 XML。通常，HTML 模式用于网页。只有在浏览器接收到带有 header `Content-Type: application/xml+xhtml` 的 XML-document 时，XML 模式才会被启用。
+浏览器有两种处理文档（document）的模式：HTML 和 XML。通常，HTML 模式用于网页。只有在浏览器接收到带有 `Content-Type: application/xml+xhtml` header 的 XML-document 时，XML 模式才会被启用。
 
 在 HTML 模式下，`tagName/nodeName` 始终是大写的：它是 `BODY`，而不是 `<body>` 或 `<BoDy>`。
 
@@ -233,7 +254,7 @@ tagName 和 nodeName 之间有什么不同吗？
 ```
 
 ```smart header="脚本不会执行"
-如果 `innerHTML` 将一个 `<script>` 标签插入到 document 中 — 它会成为 HTML 的一部分，但是不会执行。
+如果 `innerHTML` 将一个 `<script>` 标签插入到 document 中 —— 它会成为 HTML 的一部分，但是不会执行。
 ```
 
 ### 小心："innerHTML+=" 会进行完全重写
@@ -446,9 +467,9 @@ elem.innerHTML = elem.innerHTML + "..."
 
 DOM 元素还有其他属性，特别是那些依赖于 class 的属性：
 
-- `value` — `<input>`，`<select>` 和 `<textarea>`（`HTMLInputElement`，`HTMLSelectElement`……）的 value。
-- `href` — `<a href="...">`（`HTMLAnchorElement`）的 href。
-- `id` — 所有元素（`HTMLElement`）的 "id" 特性（attribute）的值。
+- `value` —— `<input>`，`<select>` 和 `<textarea>`（`HTMLInputElement`，`HTMLSelectElement`……）的 value。
+- `href` —— `<a href="...">`（`HTMLAnchorElement`）的 href。
+- `id` —— 所有元素（`HTMLElement`）的 "id" 特性（attribute）的值。
 - ……以及更多其他内容……
 
 例如：

@@ -42,7 +42,7 @@ blob.slice([byteStart], [byteEnd], [contentType]);
 ```
 
 - **`byteStart`** —— 起始字节，默认为 0。
-- **`byteEnd`** —— 最后一个字节（专有，默认为最后）。
+- **`byteEnd`** —— 最后一个字节（不包括，默认为最后）。
 - **`contentType`** —— 新 blob 的 `type`，默认与源 blob 相同。
 
 参数值类似于 `array.slice`，也允许是负数。
@@ -214,7 +214,7 @@ let blob = await new Promise(resolve => canvasElem.toBlob(resolve, 'image/png'))
 但是，如果我们需要执行低级别的处理时，我们可以从 `blob.arrayBuffer()` 中获取最低级别的 `ArrayBuffer`：
 
 ```js
-// 从 bolb 获取 arrayBuffer
+// 从 blob 获取 arrayBuffer
 const bufferPromise = await blob.arrayBuffer();
 
 // 或
@@ -237,8 +237,8 @@ const readableStream = blob.stream();
 const stream = readableStream.getReader();
 
 while (true) {
-  // 对于每次迭代：data 是下一个 blob 数据片段
-  let { done, data } = await stream.read();
+  // 对于每次迭代：value 是下一个 blob 数据片段
+  let { done, value } = await stream.read();
   if (done) {
     // 读取完毕，stream 里已经没有数据了
     console.log('all blob processed.');
@@ -246,7 +246,7 @@ while (true) {
   }
 
   // 对刚从 blob 中读取的数据片段做一些处理
-  console.log(data);
+  console.log(value);
 }
 ```
 
@@ -261,6 +261,6 @@ while (true) {
 我们可以轻松地在 `Blob` 和低级别的二进制数据类型之间进行转换：
 
 - 我们可以使用 `new Blob(...)` 构造函数从一个类型化数组（typed array）创建 `Blob`。
-- 我们可以使用 `FileReader` 从 `Blob` 中取回 `arrayBuffer`，然后在其上创建一个视图（view），用于低级别的二进制处理。
+- 我们可以使用 `blob.arrayBuffer()` 从 `Blob` 中取回 `arrayBuffer`，然后在其上创建一个视图（view），用于低级别的二进制处理。
 
 当我们需要处理大型 blob 时，将其转换为 `stream` 非常有用。你可以轻松地从 blob 创建 `ReadableStream`。`Blob` 接口的 `stream()` 方法返回一个 `ReadableStream`，其在被读取时返回 blob 中包含的数据。

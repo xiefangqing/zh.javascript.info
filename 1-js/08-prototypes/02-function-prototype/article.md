@@ -57,7 +57,7 @@ alert( rabbit.eats ); // true
 ```js
 function Rabbit() {}
 
-/* default prototype
+/* 默认的 prototype
 Rabbit.prototype = { constructor: Rabbit };
 */
 ```
@@ -68,7 +68,7 @@ Rabbit.prototype = { constructor: Rabbit };
 
 ```js run
 function Rabbit() {}
-// by default:
+// 默认：
 // Rabbit.prototype = { constructor: Rabbit }
 
 alert( Rabbit.prototype.constructor == Rabbit ); // true
@@ -78,10 +78,10 @@ alert( Rabbit.prototype.constructor == Rabbit ); // true
 
 ```js run
 function Rabbit() {}
-// by default:
+// 默认：
 // Rabbit.prototype = { constructor: Rabbit }
 
-let rabbit = new Rabbit(); // inherits from {constructor: Rabbit}
+let rabbit = new Rabbit(); // 继承自 {constructor: Rabbit}
 
 alert(rabbit.constructor == Rabbit); // true (from prototype)
 ```
@@ -162,7 +162,7 @@ Rabbit.prototype = {
 
 - `F.prototype` 属性（不要把它与 `[[Prototype]]` 弄混了）在 `new F` 被调用时为新对象的 `[[Prototype]]` 赋值。
 - `F.prototype` 的值要么是一个对象，要么就是 `null`：其他值都不起作用。
-- `"prototype"` 属性仅在设置了一个构造函数（constructor function），并通过 `new` 调用时，才具有这种特殊的影响。
+- `"prototype"` 属性仅当设置在一个构造函数上，并通过 `new` 调用时，才具有这种特殊的影响。
 
 在常规对象上，`prototype` 没什么特别的：
 ```js

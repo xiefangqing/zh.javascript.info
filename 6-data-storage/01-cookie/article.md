@@ -259,7 +259,7 @@ Cookie 的 `samesite` 选项提供了另一种防止此类攻击的方式，（�
 
 **因此，如果我们仅依靠 `samesite` 提供保护，那么在旧版本的浏览器上将很容易受到攻击。**
 
-但是，我们肯定可以将 `samesite` 与其他保护措施（例如 XSRF token）一起使用，例如 xsrf token，这样可以多增加一层保护，将来，当旧版本的浏览器淘汰时，我们可能就可以删除 xsrf token 这种方式了。
+但是，我们肯定可以将 `samesite` 与其他保护措施一起使用，例如 XSRF token，这样可以多增加一层保护，将来，当旧版本的浏览器淘汰时，我们可能就可以删除 xsrf token 这种方式了。
 
 ## httpOnly
 
@@ -281,7 +281,6 @@ Web 服务器使用 `Set-Cookie` header 来设置 cookie。并且，它可以设
 这里有一组有关 cookie 操作的函数，比手动修改 `document.cookie` 方便得多。
 
 有很多这种 cookie 库，所以这些函数只用于演示。虽然它们都能正常使用。
-
 
 ### getCookie(name)
 

@@ -3,7 +3,7 @@
 [![Gitter](https://img.shields.io/badge/chat-Gitter-forest.svg)](https://gitter.im/zh-javascript-info/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Telegram](https://img.shields.io/badge/chat-Telegram-blue.svg)](https://t.me/TheModernJavaScriptTutorial)
 
-本教程为 [React 官方文档](https://reactjs.org/docs/getting-started.html#javascript-resources) 与 [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) 并列推荐的前端教程，持续更新，永久免费，欢迎扫码关注微信公众号，加入读者群。群内自由交流技术，群友帮忙答疑，共同进步！
+本教程为 [React 官方文档](https://reactjs.org/docs/getting-started.html#javascript-resources) 与 [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript) 共同推荐的前端教程，持续更新，永久免费，欢迎扫码关注微信公众号，加入读者群。群内自由交流技术，群友帮忙答疑，共同进步！
 
 <!--
 
@@ -28,6 +28,14 @@
 教程配套每日一题：https://github.com/leviding/one-note-a-day
 
 本项目托管了现代 JavaScript 教程中文版的内容，此内容发布在 [https://zh.javascript.info](https://zh.javascript.info)
+
+## Mock 工具
+
+<a href="https://datayi.cn/w/nRbOawVP" target="_blank"><img src="https://user-images.githubusercontent.com/26959437/189130319-846e1e33-3b47-4cbc-8fe1-0fa87db5362f.svg" width="300px;" target="_blank"/></a>
+
+分享一个好用的开源接口 Mock 工具：[https://github.com/eolinker/eoapi](https://datayi.cn/w/nRbOawVP)
+
+除了 Mock 功能，还集合了 API 管理和测试功能，还可以通过插件广场帮助你将 API 发布到各个应用平台，比如发布到网关上完成 API 上线，或者和低代码平台结合，将 API 快速变成低代码平台中可使用的组件等。
 
 <!--
 
@@ -157,7 +165,7 @@
 ### 标点符号
 
 - 本教程标点符号格式采用 [此份指南](https://github.com/sparanoid/chinese-copywriting-guidelines)。
-- 资料链接、**增強**，都須 [留下空白](https://github.com/sparanoid/chinese-copywriting-guidelines#%E9%8F%88%E6%8E%A5%E4%B9%8B%E9%96%93%E5%A2%9E%E5%8A%A0%E7%A9%BA%E6%A0%BC)。
+- 资料链接、**增強**，都须 [留下空白](https://github.com/sparanoid/chinese-copywriting-guidelines#%E9%8F%88%E6%8E%A5%E4%B9%8B%E9%96%93%E5%A2%9E%E5%8A%A0%E7%A9%BA%E6%A0%BC)。
 - 中文无斜体形式，英文的斜体翻译至中文改为 **加粗**。
 
 - 斜线号 `/` 较为特殊，若用于分隔两同类型词条时，请维持半形斜线且两侧不加空白，**但在词汇们整体的前后要留一空白做分隔：**
@@ -205,7 +213,7 @@ document.querySelector('.你好').innerHTML = text;
 
 ### 外部链接
 
-**本翻译教程以维持原本外部连结为原则。**
+**本翻译教程以维持原本外部链接为原则。**
 
 但如果这个外部链接是指向 Wikipedia 的，如 `https://en.wikipedia.org/wiki/JavaScript`，并且其有质量优良的目标语言的译文，请将链接指向该译文。
 

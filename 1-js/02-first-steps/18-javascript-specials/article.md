@@ -55,7 +55,7 @@ for(;;) {
 
 该指令必须位于 JavaScript 脚本的顶部或函数体的开头。
 
-如果没有 `"use strict"`，所有东西仍可以正常工作，但是某些特性的表现方式与旧式「兼容」方式相同。我们通常更喜欢现代的方式。
+如果没有 `"use strict"`，所有东西仍可以正常工作，但某些功能将以老式的“兼容”方式运行。我们通常更喜欢现代的方式。
 
 语言的一些现代特征（比如我们将来要学习的类）会隐式地启用严格模式。
 
@@ -104,13 +104,13 @@ typeof function(){} == "function" // 函数被特殊对待
 我们使用浏览器作为工作环境，所以基本的 UI 功能将是：
 
 [`prompt(question[, default])`](mdn:api/Window/prompt)
-: 提出一个问题，并返回访问者输入的内容，如果他按下「取消」则返回 `null`。
+: 提出一个问题 `question`，并返回访问者输入的内容，如果他按下「取消」则返回 `null`。
 
 [`confirm(question)`](mdn:api/Window/confirm)
-: 提出一个问题，并建议用户在“确定”和“取消”之间进行选择。选择结果以 `true/false` 形式返回。
+: 提出一个问题 `question`，并建议用户在“确定”和“取消”之间进行选择。选择结果以 `true/false` 形式返回。
 
 [`alert(message)`](mdn:api/Window/alert)
-: 输出一个 `消息`。
+: 输出一个消息 `message`。
 
 这些函数都会产生 **模态框**，它们会暂停代码执行并阻止访问者与页面的其他部分进行交互，直到用户做出回答为止。
 
@@ -141,10 +141,10 @@ JavaScript 支持以下运算符：
     ```
 
 赋值
-: 简单的赋值：`a = b` 和合并了其他操作的赋值：`a * = 2`。
+: 简单的赋值：`a = b` 和合并了其他操作的赋值：`a *= 2`。
 
 按位运算符
-: 按位运算符在最低位级上操作 32 位的整数：详见 [文档](mdn:/JavaScript/Guide/Expressions_and_Operators#Bitwise)。
+: 按位运算符在最低位级上操作 32 位的整数：详见 [文档](mdn:/JavaScript/Guide/Expressions_and_Operators#bitwise_operators)。
 
 三元运算符
 : 唯一具有三个参数的操作：`cond ? resultA : resultB`。如果 `cond` 为真，则返回 `resultA`，否则返回 `resultB`。

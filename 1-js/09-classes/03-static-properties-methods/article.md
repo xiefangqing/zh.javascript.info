@@ -109,6 +109,17 @@ alert( article.title ); // Today's digest
 Article.remove({id: 12345});
 ```
 
+````warn header="静态方法不适用于单个对象"
+静态方法可以在类上调用，而不是在单个对象上。
+
+例如，这样的代码无法正常工作：
+
+```js
+// ...
+article.createTodays(); /// Error: article.createTodays is not a function
+```
+````
+
 ## 静态属性
 
 [recent browser=Chrome]
@@ -210,7 +221,7 @@ alert(Rabbit.prototype.__proto__ === Animal.prototype); // true
 
 举个例子， 一个用于进行比较的方法 `Article.compare(article1, article2)` 或一个工厂（factory）方法 `Article.createTodays()`。
 
-在类生命中，它们都被用关键字 `static` 进行了标记。
+在类声明中，它们都被用关键字 `static` 进行了标记。
 
 静态属性被用于当我们想要存储类级别的数据时，而不是绑定到实例。
 

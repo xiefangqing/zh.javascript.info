@@ -70,7 +70,7 @@ Proxy 捕捉器会拦截这些方法的调用。它们在 [proxy 规范](https:/
 | `[[OwnPropertyKeys]]` | `ownKeys` | [Object.getOwnPropertyNames](mdn:/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames), [Object.getOwnPropertySymbols](mdn:/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols), `for..in`, `Object.keys/values/entries` |
 
 ```warn header="不变量（Invariant）"
-JavaScript 强制执行某些不变量 — 内部方法和捕捉器必须满足的条件。
+JavaScript 强制执行某些不变量 —— 内部方法和捕捉器必须满足的条件。
 
 其中大多数用于返回值：
 - `[[Set]]` 如果值已成功写入，则必须返回 `true`，否则返回 `false`。
@@ -80,7 +80,7 @@ JavaScript 强制执行某些不变量 — 内部方法和捕捉器必须满足�
 还有其他一些不变量，例如：
 - 应用于代理（proxy）对象的 `[[GetPrototypeOf]]`，必须返回与应用于被代理对象的 `[[GetPrototypeOf]]` 相同的值。换句话说，读取代理对象的原型必须始终返回被代理对象的原型。
 
-捕捉器可以拦截这些操作，但是必须遵循下面这些规则。
+捕捉器可以拦截这些操作，但是必须遵循上面这些规则。
 
 不变量确保语言功能的正确和一致的行为。完整的不变量列表在 [规范](https://tc39.es/ecma262/#sec-proxy-object-internal-methods-and-internal-slots) 中。如果你不做奇怪的事情，你可能就不会违反它们。
 ```
@@ -244,10 +244,10 @@ alert("This line is never reached (error in the line above)");
 `Object.keys`，`for..in` 循环和大多数其他遍历对象属性的方法都使用内部方法 `[[OwnPropertyKeys]]`（由 `ownKeys` 捕捉器拦截) 来获取属性列表。
 
 这些方法在细节上有所不同：
-- `Object.getOwnPropertyNames(obj)` 返回非 Symbol 键。
-- `Object.getOwnPropertySymbols(obj)` 返回 Symbol 键。
-- `Object.keys/values()` 返回带有 `enumerable` 标志的非 Symbol 键/值（属性标志在 <info:property-descriptors> 一章有详细讲解)。
-- `for..in` 循环遍历所有带有 `enumerable` 标志的非 Symbol 键，以及原型对象的键。
+- `Object.getOwnPropertyNames(obj)` 返回非 symbol 键。
+- `Object.getOwnPropertySymbols(obj)` 返回 symbol 键。
+- `Object.keys/values()` 返回带有 `enumerable` 标志的非 symbol 键/值（属性标志在 <info:property-descriptors> 一章有详细讲解)。
+- `for..in` 循环遍历所有带有 `enumerable` 标志的非 symbol 键，以及原型对象的键。
 
 ……但是所有这些都从该列表开始。
 
@@ -453,7 +453,7 @@ user = {
 但是，此类属性有其自身的问题。特别是，它们是不可继承的。
 ```
 
-## 带有 "has" 捕捉器 的 "in range"
+## 带有 "has" 捕捉器的 "in range"
 
 让我们来看更多示例。
 
@@ -666,7 +666,7 @@ user.name = "Pete"; // 显示 "SET name=Pete"
 
 我们有一个带有 `_name` 属性和 getter 的对象 `user`。
 
-这是对 `user` 对象对一个代理（proxy）：
+这是对 `user` 对象的一个代理：
 
 ```js run
 let user = {
@@ -810,7 +810,7 @@ proxy.set('test', 1); // Error
 
 在内部，一个 `Map` 将所有数据存储在其 `[[MapData]]` 内部插槽中。代理对象没有这样的插槽。[内建方法 `Map.prototype.set`](https://tc39.es/ecma262/#sec-map.prototype.set) 方法试图访问内部属性 `this.[[MapData]]`，但由于 `this=proxy`，在 `proxy` 中无法找到它，只能失败。
 
-幸运的是，这儿有一种解决方法：
+幸运的是，这有一种解决方法：
 
 ```js run
 let map = new Map();
@@ -842,7 +842,7 @@ alert(proxy.get('test')); // 1（工作了！）
 
 类的私有字段也会发生类似的情况。
 
-例如，`getName()` 方法访问私有的 `#name` 属性，并在代理后中断（break）：
+例如，`getName()` 方法访问私有的 `#name` 属性，并在代理后中断：
 
 ```js run
 class User {

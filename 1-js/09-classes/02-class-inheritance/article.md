@@ -34,7 +34,7 @@ let animal = new Animal("My animal");
 
 ……然后我们想创建另一个 `class Rabbit`：
 
-因为 rabbits 是 animals，所以 class `Rabbit` 应该是基于 class `Animal` 的，可以访问 animal 的方法，以便 rabbits 可以做“一般”动物可以做的事儿。
+因为 rabbit 是 animal，所以 class `Rabbit` 应该是基于 class `Animal` 的，可以访问 animal 的方法，以便 rabbit 可以做“一般”动物可以做的事儿。
 
 扩展另一个类的语法是：`class Child extends Parent`。
 
@@ -55,7 +55,7 @@ rabbit.run(5); // White Rabbit runs with speed 5.
 rabbit.hide(); // White Rabbit hides!
 ```
 
-Class `Rabbit` 的对象可以访问例如 `rabbit.hide()` 等 `Rabbit` 的方法，还可以访问例如 `rabbit.run()` 等 `Animal` 的方法。
+class `Rabbit` 的对象可以访问例如 `rabbit.hide()` 等 `Rabbit` 的方法，还可以访问例如 `rabbit.run()` 等 `Animal` 的方法。
 
 在内部，关键字 `extends` 使用了很好的旧的原型机制进行工作。它将 `Rabbit.prototype.[[Prototype]]` 设置为 `Animal.prototype`。所以，如果在 `Rabbit.prototype` 中找不到一个方法，JavaScript 就会从 `Animal.prototype` 中获取该方法。
 
@@ -106,7 +106,7 @@ class Rabbit extends Animal {
 }
 ```
 
-但是通常来说，我们不希望完全替换父类的方法，而是希望在父类方法的基础上进行调整或扩展其功能。我们在我们的方法中做一些事儿，但是在它之前或之后或在过程中会调用父类方法。
+然而通常，我们不希望完全替换父类的方法，而是希望在父类方法的基础上进行调整或扩展其功能。我们在我们的方法中做一些事儿，但是在它之前或之后或在过程中会调用父类方法。
 
 Class 为此提供了 `"super"` 关键字。
 
@@ -160,6 +160,7 @@ rabbit.stop(); // White Rabbit stands still. White Rabbit hides!
 正如我们在 <info:arrow-functions> 一章中所提到的，箭头函数没有 `super`。
 
 如果被访问，它会从外部函数获取。例如：
+
 ```js
 class Rabbit extends Animal {
   stop() {
@@ -175,7 +176,6 @@ class Rabbit extends Animal {
 setTimeout(function() { super.stop() }, 1000);
 ```
 ````
-
 
 ## 重写 constructor
 
@@ -280,8 +280,6 @@ alert(rabbit.earLength); // 10
 */!*
 ```
 
-
-
 ### 重写类字段: 一个棘手的注意要点
 
 ```warn header="高阶要点"
@@ -294,7 +292,7 @@ alert(rabbit.earLength); // 10
 
 我们不仅可以重写方法，还可以重写类字段。
 
-不过，当我们访问在父类构造器中的一个被重写的字段时，这里会有一个诡异的行为，这与绝大多数其他编程语言都很不一样。
+不过，当我们在父类构造器中访问一个被重写的字段时，有一个诡异的行为，这与绝大多数其他编程语言都很不一样。
 
 请思考此示例：
 
@@ -375,7 +373,6 @@ new Rabbit(); // rabbit
 幸运的是，这种行为仅在一个被重写的字段被父类构造器使用时才会显现出来。接下来它会发生的东西可能就比较难理解了，所以我们要在这里对此行为进行解释。
 
 如果出问题了，我们可以通过使用方法或者 getter/setter 替代类字段，来修复这个问题。
-
 
 ## 深入：内部探究和 [[HomeObject]]
 
